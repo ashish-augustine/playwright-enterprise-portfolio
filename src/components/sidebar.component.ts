@@ -1,7 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 
 export class SidebarComponent {
-  private page: Page;
   public readonly menuButton: Locator;
   public readonly logoutLink: Locator;
   public readonly resetAppStateLink: Locator;
@@ -9,7 +8,6 @@ export class SidebarComponent {
   public readonly closeMenuButton: Locator;
 
   constructor(page: Page) {
-    this.page = page;
     this.menuButton = page.locator('#react-burger-menu-btn');
     this.logoutLink = page.locator('#logout_sidebar_link');
     this.resetAppStateLink = page.locator('#reset_sidebar_link');
