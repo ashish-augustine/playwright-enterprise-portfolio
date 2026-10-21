@@ -1,4 +1,3 @@
-cat << 'EOF' > playwright.config.ts;
 import { defineConfig, devices } from '@playwright/test';
 import { env } from './src/config/env.config';
 
@@ -27,18 +26,34 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
   },
   projects: [
+    /* Setup project for global authentication */
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: '.auth/standard_user.json',
+      },
+      dependencies: ['setup'],
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        storageState: '.auth/standard_user.json',
+      },
+      dependencies: ['setup'],
     },
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+        storageState: '.auth/standard_user.json',
+      },
+      dependencies: ['setup'],
     },
   ],
 });
-EOF;
