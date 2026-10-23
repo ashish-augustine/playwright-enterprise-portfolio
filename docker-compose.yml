@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  playwright:
+    build: .
+    image: enterprise-sdet-portfolio:latest
+    container_name: playwright-e2e-tests
+    ipc: host
+    environment:
+      - CI=true
+    volumes:
+      - ./playwright-report:/app/playwright-report
+      - ./allure-results:/app/allure-results
